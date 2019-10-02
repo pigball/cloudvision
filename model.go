@@ -91,7 +91,7 @@ func (d *Document) extractByLabelContainsAndJoin(label string) string {
 			avg := int(average(spaceDiffs(valPlane)))
 			log.Print(avg)
 			filtered := findNearBySameWord(valPlane, valEA, avg)
-			printEAs(filtered)
+			// printEAs(filtered)
 
 			sortByAxis(filtered, x)
 			return joinDescriptions(filtered)
@@ -109,7 +109,7 @@ func (d *Document) findLabelHead(label string) *pb.EntityAnnotation {
 		avg := int(average(spaceDiffs(nearby)))
 		log.Print(avg)
 		filtered := findNearBySameWord(nearby, ea, avg)
-		printEAs(filtered)
+		// printEAs(filtered)
 		sortByAxis(filtered, x)
 
 		labelHeadEA = filtered[0]
