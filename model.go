@@ -1,8 +1,6 @@
 package cloudvision
 
 import (
-	"log"
-
 	pb "google.golang.org/genproto/googleapis/cloud/vision/v1"
 )
 
@@ -89,7 +87,7 @@ func (d *Document) extractByLabelContainsAndJoin(label string) string {
 			valEA := nearby[index+1]
 			valPlane := d.findNearByInSameAxis(valEA, y)
 			avg := int(average(spaceDiffs(valPlane)))
-			log.Print(avg)
+			// log.Print(avg)
 			filtered := findNearBySameWord(valPlane, valEA, avg)
 			// printEAs(filtered)
 
@@ -107,7 +105,7 @@ func (d *Document) findLabelHead(label string) *pb.EntityAnnotation {
 	if ea != nil {
 		nearby := d.findNearByInSameAxis(ea, y)
 		avg := int(average(spaceDiffs(nearby)))
-		log.Print(avg)
+		// log.Print(avg)
 		filtered := findNearBySameWord(nearby, ea, avg)
 		// printEAs(filtered)
 		sortByAxis(filtered, x)
