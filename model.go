@@ -35,7 +35,7 @@ func (d *Document) Parse() PassportInfo {
 	pi.Name = d.extractByLabelAndJoin("Name")
 	pi.Sex = d.extractByLabel("Sex")
 	pi.CountryCode = d.extractByLabel("Country")
-	pi.PassportNo = d.extractByLabel("Passport")
+	pi.PassportNo = d.extractByLabelAndJoin("Passport")
 	pi.Nationality = d.extractByLabel("Nationality")
 	pi.DateOfBirth = d.extractByLabelContainsAndJoin("birth")
 	pi.DateOfIssue = d.extractByLabelContainsAndJoin("issue")
@@ -52,8 +52,10 @@ func (d *Document) extractByLabel(label string) string {
 
 	nearby := d.findNearByInSameAxis(ea, x)
 	// printEAs(nearby)
-
 	_, index := findByDescription(nearby, label)
+	if index == -1 {
+		return ""
+	}
 	valEA := nearby[index+1]
 	return valEA.Description
 }
@@ -63,14 +65,18 @@ func (d *Document) extractByLabelAndJoin(label string) string {
 	if ea == nil {
 		return ""
 	}
-
 	nearby := d.findNearByInSameAxis(ea, x)
 	// printEAs(nearby)
 	_, index := findByDescription(nearby, label)
+	if index == -1 {
+		return ""
+	}
 	valEA := nearby[index+1]
 	valPlane := d.findNearByInSameAxis(valEA, y)
-	// printEAs(valPlane)
-	return joinDescriptions(valPlane)
+	filtered := findNearBySameWord(valPlane, valEA, int(average(spaceDiffs(valPlane))))
+	sortByAxis(filtered, x)
+	// printEAs(filtered)
+	return joinDescriptions(filtered)
 }
 
 func (d *Document) extractByLabelContainsAndJoin(label string) string {
