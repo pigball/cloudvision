@@ -11,4 +11,6 @@ type PassportInfo struct {
 	DateOfBirth  string
 	PassportNo   string
 	CountryCode  string
+	PlaceOfBirth string
+	Authority    string
 }

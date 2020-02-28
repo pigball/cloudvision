@@ -38,6 +38,8 @@ func (d *Document) Parse() PassportInfo {
 	pi.DateOfBirth = d.extractByLabelContainsAndJoin("birth")
 	pi.DateOfIssue = d.extractByLabelContainsAndJoin("issue")
 	pi.DateOfExpiry = d.extractByLabelContainsAndJoin("expiry")
+	pi.PlaceOfBirth = d.extractByLabelContainsAndJoin("Place")
+	pi.Authority = d.extractByLabelAndJoin("Authority")
 
 	return pi
 }
