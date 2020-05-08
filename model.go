@@ -31,7 +31,7 @@ func (d *Document) Parse() PassportInfo {
 
 	pi.Type = d.extractByLabel("Type")
 	pi.Name = d.extractByLabelAndJoin("Name")
-	pi.Sex = d.extractByLabel("Sex")
+	pi.Sex = d.extractByLabelAndJoin("Sex")
 	pi.CountryCode = d.extractByLabel("Country")
 	pi.PassportNo = d.extractByLabelAndJoin("Passport")
 	pi.Nationality = d.extractByLabel("Nationality")
